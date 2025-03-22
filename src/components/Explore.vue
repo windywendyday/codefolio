@@ -1,11 +1,16 @@
 <template>
 <div class="explore-container">
-  <h2>Explore</h2>
+  <el-container>
+    <el-aside>
+      <Filter />
+    </el-aside>
+    <el-main>Main</el-main>
+  </el-container>
 </div>
 </template>
 
 <script setup lang="ts">
-
+import Filter from '@/components/Filter.vue'
 </script>
 
 <style scoped>

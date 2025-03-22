@@ -2,7 +2,7 @@
 <div class="home-page">
   <el-container class="container">
     <el-header class="header" height="80px">
-      <div>
+      <div @click="goToHome" class="logo">
         <img src="/title.png" alt="" class="title-image">
       </div>
       <div class="navigation">
@@ -23,17 +23,23 @@
 <script setup lang="ts">
 import Explore from '@/components/Explore.vue';
 import FAQs from '@/components/FAQs.vue';
-import { ref } from 'vue'
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 defineOptions({
   components: { Explore, FAQs }
 })
 const curComponent = ref('Explore')
+const router = useRouter();
 
 const switchCurComponent = (index: number) => {
   curComponent.value = index === 0 ? 'Explore' : 'FAQs'
 }
 
+const goToHome = () => {
+  console.log('去首页')
+  router.push('/home')
+}
 </script>
 
 <style scoped>
@@ -46,7 +52,11 @@ const switchCurComponent = (index: number) => {
   height: 80px;
   position: relative;  /* 添加相对定位 */
 }
-
+.logo {
+  width: auto;
+  height: auto;
+  z-index: 2;
+}
 .title-image {
   width: 180px;
   height: auto;
