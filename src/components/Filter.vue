@@ -1,6 +1,7 @@
 <template>
   <el-form
     :model="filterValue"
+    ref="filterRef"
   >
     <el-form-item label="公司" prop="companies">
       <div class="company-tags">
@@ -30,6 +31,10 @@
         <el-radio value="campus">应届校招</el-radio>
         <el-radio value="experienced">社招</el-radio>
       </el-radio-group>
+    </el-form-item>
+    <el-form-item>
+      <el-button @click="submitFilterForm" plain type="primary">提交</el-button>
+      <el-button @click="resetFilterForm" plain>重置</el-button>
     </el-form-item>
   </el-form>
 </template>
@@ -61,10 +66,10 @@ interface IFilter {
 const companies = ref<ICompany[]>([
   { id: 1, companyName: '腾讯' },
   { id: 2, companyName: '阿里巴巴' },
-  { id: 3, companyName: '字节跳动' },
-  { id: 4, companyName: '百度' },
+  { id: 3, companyName: '美团' },
+  { id: 4, companyName: '字节跳动' },
   { id: 5, companyName: '京东' },
-  { id: 6, companyName: '美团' },
+  { id: 6, companyName: '百度' },
   { id: 7, companyName: '快手' },
   { id: 8, companyName: '网易' },
   { id: 9, companyName: '拼多多' },
@@ -78,7 +83,7 @@ const filterValue = ref<IFilter>({
   companies: [],
   role: {} as IRole,
   resumeType: {} as IResumeType,
-})
+});
 
 const handleCompanyChange = (company: ICompany, checked: boolean) => {
   if (checked) {
@@ -86,7 +91,17 @@ const handleCompanyChange = (company: ICompany, checked: boolean) => {
   } else {
     filterValue.value.companies = filterValue.value.companies.filter(c => c.id !== company.id)
   }
-}
+};
+
+const resetFilterForm = () => {
+  filterValue.value = {
+    companies: [],
+    role: {} as IRole,
+    resumeType: {} as IResumeType,
+  };
+};
+
+const submitFilterForm = async () => {};
 </script>
 
 <style scoped>
@@ -94,7 +109,7 @@ const handleCompanyChange = (company: ICompany, checked: boolean) => {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  padding: 10px 0;
+  padding: 4px 0;
 }
 
 :deep(.el-check-tag) {
