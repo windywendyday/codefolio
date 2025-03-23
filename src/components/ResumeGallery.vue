@@ -5,6 +5,7 @@
         v-for="resume in resumes"
         :key="resume.id"
         class="gallery-item"
+        @click="handleResumeClick(resume)"
       >
         <el-card
           class="resume-card"
@@ -48,12 +49,19 @@
         </el-card>
       </div>
     </div>
+
+    <ResumeDetail
+      v-model="dialogVisible"
+      :resume="selectedResume"
+      @consult="handleConsult"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref} from 'vue'
 import { Picture } from '@element-plus/icons-vue'
+import ResumeDetail from './ResumeDetail.vue'
 
 interface IResume {
   id: number;
@@ -63,7 +71,13 @@ interface IResume {
   username: string;
   userAvatar: string;
   date: string;
+  description?: string;
+  email?: string;
+  phone?: string;
 }
+
+const dialogVisible = ref(false)
+const selectedResume = ref<IResume | null>(null)
 
 const resumes = ref<IResume[]>([
   {
@@ -73,7 +87,10 @@ const resumes = ref<IResume[]>([
     tags: ['前端', 'React', 'Vue'],
     username: '张三',
     userAvatar: 'https://example.com/avatar1.jpg',
-    date: '2024-03-20'
+    date: '2024-03-20',
+    description: '3年前端开发经验，精通React和Vue技术栈，有大型项目经验。',
+    email: 'zhangsan@example.com',
+    phone: '13800138000'
   },
   {
     id: 2,
@@ -149,6 +166,16 @@ const resumes = ref<IResume[]>([
   },
   // 添加更多示例数据...
 ])
+
+const handleResumeClick = (resume: IResume) => {
+  selectedResume.value = resume
+  dialogVisible.value = true
+}
+
+const handleConsult = (resumeId: number) => {
+  // 这里可以添加咨询请求的处理逻辑
+  console.log('咨询简历ID:', resumeId)
+}
 </script>
 
 <style scoped>
@@ -166,6 +193,7 @@ const resumes = ref<IResume[]>([
 .gallery-item {
   width: 320px;
   flex-shrink: 0;
+  cursor: pointer;
 }
 
 .resume-card {
@@ -175,6 +203,7 @@ const resumes = ref<IResume[]>([
 
 .resume-card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
 }
 
 .image-container {
