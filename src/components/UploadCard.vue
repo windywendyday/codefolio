@@ -6,6 +6,9 @@
         class="upload-demo"
         drag
         multiple
+        accept=".pdf"
+        :limit="1"
+        :before-upload="handleChange"
       >
         <el-icon><Upload /></el-icon>
         <div class="el-upload__text">
@@ -17,7 +20,7 @@
           格式：PDF
         </span>
         <span class="el-upload__tip">
-          大小：3MB以内
+          大小：1MB以内
         </span>
       </div>
     </div>
@@ -26,6 +29,19 @@
 
 <script setup lang="ts">
 import { Upload } from '@element-plus/icons-vue'
+import { ElMessage } from 'element-plus'
+
+const handleChange = (file: File) => {
+  const size = file.size
+  console.log('size', size)
+  if(size > 1048576) {
+    ElMessage({
+      message: '上传的文件大小不能超过1MB！',
+      type: 'warning',
+    });
+    return;
+  }
+}
 </script>
 
 <style scoped>
