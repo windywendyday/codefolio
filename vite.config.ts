@@ -15,9 +15,9 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://your-external-server.com', // 替换为你的后端 API
-        changeOrigin: true, // 允许跨域
-        rewrite: (path) => path.replace(/^\/api/, '') // 代理时去掉 `/api`
+        target: 'http://49.234.181.165:8080',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '')
       }
     }
   },

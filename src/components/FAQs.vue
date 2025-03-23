@@ -18,8 +18,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { Plus, Minus } from '@element-plus/icons-vue'
+import { getFAQs } from '@/api/api.ts'
+import { ElMessage } from 'element-plus'
+import { isSuccess } from '@/util/utils.ts'
 
 interface IQuestion {
   id: number;
@@ -28,28 +31,51 @@ interface IQuestion {
   isExpanded?: boolean;
 }
 
-const Questions = [
-  {
-    id: 1,
-    question: 'What is the question1?',
-    answer: 'What is the answer1?',
-    isExpanded: false
-  },
-  {
-    id: 2,
-    question: 'What is the question2?',
-    answer: 'What is the answer2?',
-    isExpanded: false
-  },
-  {
-    id: 3,
-    question: 'What is the question3?',
-    answer: 'What is the answer3?',
-    isExpanded: false
-  }
-]
+// const Questions = [
+//   {
+//     id: 1,
+//     question: 'What is the question1?',
+//     answer: 'What is the answer1?',
+//     isExpanded: false
+//   },
+//   {
+//     id: 2,
+//     question: 'What is the question2?',
+//     answer: 'What is the answer2?',
+//     isExpanded: false
+//   },
+//   {
+//     id: 3,
+//     question: 'What is the question3?',
+//     answer: 'What is the answer3?',
+//     isExpanded: false
+//   }
+// ]
 
-const questions = ref<IQuestion[]>(Questions)
+const questions = ref<IQuestion[]>([]);
+
+const initFAQs = async () => {
+  const { code, data, message } = await getFAQs();
+  if (!isSuccess(code)) {
+    ElMessage({
+      message: message,
+      type: 'warning',
+    });
+    return ;
+  }
+
+  const items = data
+  console.log('items', items)
+  questions.value = items.map((item) => {
+    return Object.assign(item, {
+      isExpanded: false,
+    })
+  })
+};
+
+onMounted(() => {
+  initFAQs()
+});
 
 const toggleAnswer = (id: number) => {
   const question = questions.value.find(q => q.id === id)
