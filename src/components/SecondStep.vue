@@ -1,9 +1,12 @@
 <template>
-<h1>这是第二步</h1>
+  <div>
+    <StepsBar :current-step="1" :steps="3" />
+  </div>
 </template>
 
 <script setup lang="ts">
 
+import StepsBar from '@/components/StepsBar.vue'
 </script>
 
 <style scoped>

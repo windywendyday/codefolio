@@ -1,7 +1,6 @@
 <template>
-  <!-- 进度条 -->
   <div>
-    <StepsBar :current-step="currentStep" :steps="3" />
+    <StepsBar :current-step="0" :steps="3" />
   </div>
   <div class="upload-resume-container">
     <UploadCard class="upload-container"/>
@@ -13,9 +12,7 @@
 import StepsBar from '@/components/StepsBar.vue'
 import PreviewResume from '@/components/PreviewResume.vue'
 import UploadCard from '@/components/UploadCard.vue';
-import { ref } from 'vue'
 
-let currentStep = ref(0);
 </script>
 
 <style scoped>
