@@ -54,7 +54,7 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import type { FormInstance, FormRules } from 'element-plus'
-import type { IUserInfo } from '../interface/interface.ts'
+import type { IUserInfo } from '../../interface/interface.ts'
 import { ElMessage } from 'element-plus'
 import { submitSignUpInfo } from '@/api/api.ts'
 import { useRouter } from 'vue-router'

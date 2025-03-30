@@ -4,3 +4,11 @@ export interface IUserInfo {
   uid: string,
   username: string,
 }
+
+export interface IUploadResume {
+  fileKey: string;
+  role: string;
+  level: string;
+  university: string;
+  passCompany: string[];
+}

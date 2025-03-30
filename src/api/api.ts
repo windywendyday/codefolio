@@ -1,5 +1,5 @@
 import axios from 'axios'
-import type { IUserInfo } from '../interface/interface.ts'
+import type { IUserInfo, IUploadResume } from '../interface/interface.ts'
 
 interface IResponse {
   data: any;
@@ -44,4 +44,12 @@ export function submitSignUpInfo(data:IUserInfo): Promise<void> {
 
 export function getFAQs(): Promise<IResponse> {
   return instance.get('/api/v1/faqs')
+}
+
+export function submitResume(data: IUploadResume): Promise<IResponse> {
+  return instance.post('/api/v1/resumes/create', data)
+}
+
+export function getSchoolList(): Promise<IResponse> {
+  return instance.get('/api/v1/universities')
 }

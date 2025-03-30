@@ -23,7 +23,7 @@
 <script setup lang="ts">
 import Explore from '@/components/Explore.vue';
 import FAQs from '@/components/FAQs.vue';
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
 defineOptions({
@@ -31,6 +31,80 @@ defineOptions({
 })
 const curComponent = ref('Explore')
 const router = useRouter();
+
+// 标签数据
+const roleTags = [
+  {
+    label: '前端',
+    value: 1,
+    disabled: false,
+  },
+  {
+    label: '后端',
+    value: 2,
+    disabled: false,
+  },
+  {
+    label: '算法',
+    value: 3,
+    disabled: false,
+  },
+  {
+    label: '产品',
+    value: 4,
+    disabled: false,
+  },
+  {
+    label: '运营',
+    value: 5,
+    disabled: false,
+  }
+];
+
+const companyTags = [
+  { value: 1, label: '腾讯', disabled: false },
+  { value: 2, label: '阿里巴巴', disabled: false },
+  { value: 3, label: '美团', disabled: false },
+  { value: 4, label: '字节跳动', disabled: false },
+  { value: 5, label: '京东', disabled: false },
+  { value: 6, label: '百度', disabled: false },
+  { value: 7, label: '快手', disabled: false },
+  { value: 8, label: '网易', disabled: false },
+  { value: 9, label: '拼多多', disabled: false },
+  { value: 10, label: '滴滴', disabled: false },
+  { value: 11, label: '华为', disabled: false },
+  { value: 12, label: '哔哩哔哩', disabled: false },
+  { value: 13, label: '小红书', disabled: false },
+];
+
+const resumeTags = [
+  {
+    label: '实习',
+    value: 1,
+    disabled: false,
+  },
+  {
+    label: '校招',
+    value: 2,
+    disabled: false,
+  },
+  {
+    label: '社招',
+    value: 3,
+    disabled: false,
+  },
+];
+
+// 保存数据到localStorage
+const saveDataToLocalStorage = () => {
+  try {
+    localStorage.setItem('roleTags', JSON.stringify(roleTags))
+    localStorage.setItem('companyTags', JSON.stringify(companyTags))
+    localStorage.setItem('resumeTags', JSON.stringify(resumeTags))
+  } catch (error) {
+    console.error('保存标签数据失败:', error)
+  }
+}
 
 const switchCurComponent = (index: number) => {
   curComponent.value = index === 0 ? 'Explore' : 'FAQs'
@@ -40,6 +114,12 @@ const goToHome = () => {
   console.log('去首页')
   router.push('/home')
 }
+
+// 组件挂载时保存数据
+onMounted(() => {
+  saveDataToLocalStorage()
+})
+
 </script>
 
 <style scoped>

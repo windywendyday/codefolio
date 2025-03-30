@@ -9,22 +9,22 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/login',
     name: 'Login',
-    component: () => import('@/views/LogIn.vue')
+    component: () => import('@/views/login/LogIn.vue')
   },
   {
     path: '/signup',
     name: 'SignUp',
-    component: () => import('@/views/SignUp.vue')
+    component: () => import('@/views/signup/SignUp.vue')
   },
   {
     path: '/home',
     name: 'Home',
-    component: () => import('@/views/HomePage.vue')
+    component: () => import('@/views/home/HomePage.vue')
   },
   {
     path: '/upload',
     name: 'UploadResume',
-    component: () => import('@/views/UploadResume.vue')
+    component: () => import('@/views/uploadResume/UploadResume.vue')
   }
 ]
 

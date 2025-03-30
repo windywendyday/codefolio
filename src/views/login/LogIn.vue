@@ -17,7 +17,7 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import type { FormInstance, FormRules } from 'element-plus'
-import type { IUserInfo } from '../interface/interface.ts'
+import type { IUserInfo } from '../../interface/interface.ts'
 import { submitLogInInfo } from '@/api/api.ts'
 
 const currentUserInfo = ref<IUserInfo>({
